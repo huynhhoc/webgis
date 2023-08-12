@@ -1,17 +1,44 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
-
-<!DOCTYPE html>
-<html>
+﻿<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Web GIS Application</title>
-    <link rel="stylesheet" href="https://unpkg.com/ol@6.5.0/dist/ol.css" />
-    <script src="https://unpkg.com/ol@6.5.0/dist/ol.js"></script>
-    <script src="~/js/map.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple WebGIS with GeoServer</title>
+    <!-- Include Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <!-- Include Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <!-- Include leaflet-geotools JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/leaflet-geotools@0.2.0/dist/leaflet-geotools.js"></script>
 </head>
 <body>
-    <div id="map" class="map"></div>
+    <div id="map" style="width: 100%; height: 600px;"></div>
+    <script>
+        // Initialize the map
+        var map = L.map('map').setView([0, 0], 2);
+
+        // Add the WMS layer from GeoServer
+        var wmsLayer = L.tileLayer.wms('http://localhost:8080/geoserver/ne/wms', {
+            layers: 'ne:world',
+            format: 'image/png',
+            transparent: true,
+            version: '1.1.0',
+            attribution: "World boundaries &copy; <a href='http://www.naturalearthdata.com'>Natural Earth</a>"
+        }).addTo(map);
+        // Initialize the map (same as before)
+        var map = L.map('map').setView([0, 0], 2);
+
+        // Define a WMS GetFeatureInfo control
+        var infoControl = L.control.wmsFeatureInfo({
+            autoActivate: true, // Automatically activate the control
+            content: 'Loading...', // Initial content while loading
+            layers: [wmsLayer], // List of WMS layers to query
+            queryVisible: true, // Query only visible layers
+            infoFormat: 'text/html' // Response format
+        });
+
+        // Add the WMS GetFeatureInfo control to the map
+        map.addControl(infoControl);
+    </script>
 </body>
 </html>
-

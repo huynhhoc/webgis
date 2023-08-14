@@ -16,7 +16,7 @@ Features
 
 # Getting Started
 
-    Clone the repository: git clone https://github.com/your-username/web-gis-application.git
+    Clone the repository: git clone https://github.com/huynhhoc/webgis.git
     Open the project in your preferred code editor.
 
 # Configuration

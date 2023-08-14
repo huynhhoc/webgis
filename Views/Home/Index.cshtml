@@ -7,27 +7,113 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        #header {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        #map-container {
+            position: relative;
+            height: calc(100vh - 40px);
+        }
+
+        /* Style for the map container */
+        #map {
+            width: 100%;
+            height: 80%;
+        }
+
+        /* Style for the search container */
+        #search-container {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 1000;
+            background-color: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Style for the layer checklist container */
+        #layer-checklist {
+            position: absolute;
+            bottom: 160px;
+            right: 20px;
+            background-color: rgba(255, 255, 0, 0.8);
+            padding: 5px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+
+        /* Style for the popup container */
+        .popup-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            bottom: 30px; /* Adjust the value as needed */
+            right: 0;
+            transform: translateX(100%);
+        }
+        
+        .popup-content.show {
+            display: block;
+        }
+    </style>
 </head>
 <body>
-    <div id="map" style="width: 100%; height: 600px;"></div>
-    <!-- Include the layer checklist div -->
-    <div id="layer-checklist" class="layer-checklist"></div>
-    <div id="map" style="width: 100%; height: 600px;"></div>
+    <div id="header">
+        <h1>Web GIS Application</h1>
+    </div>
+    <div id="map-container">
+        <div id="search-container">
+            <input type="text" id="search-input" placeholder="Search by name_1" />
+            <button id="search-button">Search</button>
+        </div>
+        <div id="map"></div>
+        <div id="layer-checklist">
+            <h2>Layers</h2>
+            <div class="popup-content">
+                <label><input type="checkbox" id="world-layer" hidden /></label>
+                <label><input type="checkbox" id="france-layer" hidden /></label>
+                <!-- Add more layer checkboxes here -->
+            </div>
+        </div>
+    </div>
     <!-- Reference the external map.js file -->
     <script src="js/map.js"></script>
     <script>
         // Your map.js script here
-        
-        // Add the layer checklist using JavaScript
+
         var layerChecklist = document.getElementById('layer-checklist');
-        
-        // Function to add a layer to the checklist
+        var popupContent = layerChecklist.querySelector('.popup-content');
+
+        // Toggle the popup content
+        layerChecklist.addEventListener('click', function() {
+            popupContent.classList.toggle('show');
+        });
+
+        // Add the layer checklist using JavaScript
         function addLayerToChecklist(layer, id, name) {
             var label = document.createElement('label');
             var input = document.createElement('input');
             input.type = 'checkbox';
             input.checked = true;
-            input.addEventListener('change', function() {
+            input.addEventListener('change', function () {
                 if (input.checked) {
                     map.addLayer(layer);
                 } else {
@@ -37,7 +123,7 @@
 
             label.appendChild(input);
             label.appendChild(document.createTextNode(name));
-            layerChecklist.appendChild(label);
+            popupContent.appendChild(label);
         }
 
         // Add wmsLayer and wmsLayerfr to the checklist

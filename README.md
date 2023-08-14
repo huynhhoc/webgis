@@ -32,7 +32,8 @@ Features
     Click the layer checklist button at the bottom-right to toggle the display of layers.
     Check/uncheck the checkboxes in the layer popup to control the visibility of layers on the map.
 
-    <img align="center" width="600"  src="./Images/homepage.jpg">
+
+<img align="center" width="600"  src="./Images/homepage.jpg">
 
 # Contributing
 

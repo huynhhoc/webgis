@@ -34,18 +34,6 @@ var wmsLayer = L.tileLayer.wms('http://localhost:8080/geoserver/ne/wms', {
     attribution: "World boundaries &copy; <a href='http://www.naturalearthdata.com'>Natural Earth</a>"
 }).addTo(map);
 
-// Initialize the GeoJSON layer with FRA_adm1 data
-fetch('http://localhost:8080/geoserver/ne/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=ne:FRA_adm1&outputFormat=application%2Fjson')
-    .then(response => response.json())
-    .then(data => {
-        geojsonLayer.addData(data);
-        // Set the selected feature for highlighting
-        selectedFeature = geojsonLayer.getLayers()[0]; // For example, using the first feature
-    })
-    .catch(error => {
-        console.error('Error fetching or processing data:', error);
-    });
-
 // Search button click event handler
 var searchButton = document.getElementById('search-button');
 searchButton.addEventListener('click', function () {
@@ -88,7 +76,6 @@ function addLayerToChecklist(layer, id, name) {
 
 // Add the GeoJSON layer to the map
 map.addLayer(geojsonLayer);
-
 
 function searchFeatureByName(name) {
     // Wait for the data to be fetched and added to the geojsonLayer

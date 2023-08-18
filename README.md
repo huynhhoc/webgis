@@ -35,6 +35,8 @@ Features
 
 <img align="center" width="600"  src="./Images/homepage.jpg">
 
+<img align="center" width="600"  src="./Images/sample.mp4">
+
 # Contributing
 
 Contributions are welcome! Please create a pull request with any improvements or fixes.

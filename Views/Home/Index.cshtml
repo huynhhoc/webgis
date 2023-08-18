@@ -89,11 +89,13 @@
             <h2>Layers</h2>
             <div class="popup-content">
                 <label><input type="checkbox" id="world-layer" hidden /></label>
-                <label><input type="checkbox" id="france-layer" hidden /></label>
+                <label><input type="checkbox" id="france-layer" hidden checked /></label>
                 <!-- Add more layer checkboxes here -->
             </div>
         </div>
+
     </div>
+
     <!-- Reference the external map.js file -->
     <script src="js/map.js"></script>
     <script>
@@ -128,7 +130,7 @@
 
         // Add wmsLayer and wmsLayerfr to the checklist
         addLayerToChecklist(wmsLayer, 'ne:world', 'World Boundaries');
-        addLayerToChecklist(wmsLayerfr, 'ne:FRA_adm1', 'France Regions');
+        addLayerToChecklist(geojsonLayer, 'ne:FRA_adm1', 'France Regions');
     </script>
 </body>
 </html>

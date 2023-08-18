@@ -35,7 +35,6 @@ Features
 
 ![me](https://github.com/huynhhoc/webgis/blob/main/Images/sample..gif)
 
-<img align="center" width="600"  src="./Images/homepage.jpg">
 
 # Contributing
 

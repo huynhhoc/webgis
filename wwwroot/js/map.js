@@ -33,6 +33,13 @@ var wmsLayer = L.tileLayer.wms('http://localhost:8080/geoserver/ne/wms', {
     version: '1.1.0',
     attribution: "World boundaries &copy; <a href='http://www.naturalearthdata.com'>Natural Earth</a>"
 }).addTo(map);
+var wmsLayer = L.tileLayer.wms('http://localhost:8080/geoserver/ne/wms', {
+    layers: 'ne:fra_roads',
+    format: 'image/png',
+    transparent: true,
+    version: '1.1.0',
+    attribution: "Roads"
+}).addTo(map);
 
 // Search button click event handler
 var searchButton = document.getElementById('search-button');
@@ -71,7 +78,7 @@ function addLayerToChecklist(layer, id, name) {
 
     label.appendChild(input);
     label.appendChild(document.createTextNode(name));
-    popupContent.appendChild(label);
+    layerChecklist.appendChild(label);
 }
 
 // Add the GeoJSON layer to the map
